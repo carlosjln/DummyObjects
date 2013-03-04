@@ -1,0 +1,19 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+		<id>DummyObjects</id>
+		<version>$version$</version>
+		
+		<title>DummyObjects</title>
+		<description>Some helpful extensions :)</description>
+		<projectUrl>https://github.com/carlosjln/DummyObjects</projectUrl>
+		
+		<authors>Carlos J. López</authors>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<copyright>Copyright © 2013</copyright>
+	</metadata>
+	<files>
+        <file src="bin\Release\DummyObjects.pdb" target="lib\net40" />
+		<file src="**\*.cs" target="src" exclude="**\AssemblyInfo.cs"/>
+	</files>
+</package>

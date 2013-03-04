@@ -41,18 +41,14 @@
     </Compile>
     <Compile Include="Extensions\internal_extensions.cs" />
     <Compile Include="Core\Enumerable.cs" />
-    <Compile Include="Core\IEnumerable.cs" />
+    <Compile Include="Core\Interfaces\IEnumerable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>if $(ConfigurationName) == Release NuGet.exe pack "$(ProjectPath)" -OutputDirectory "C:\Projects\Tools\Nuget\LocalFeed" -Properties Configuration=Release</PostBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
+  <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
+    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyVersion" />
+    </GetAssemblyIdentity>
+    <Exec Command="Nuget.exe pack $(ProjectPath) -OutputDirectory C:\Projects\Tools\Nuget\LocalFeed -Properties Configuration=Release" />
   </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
