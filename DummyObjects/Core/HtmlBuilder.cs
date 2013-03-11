@@ -13,12 +13,12 @@ namespace DummyObjects {
 				const string closing_tag = "</select>";
 
 				// TODO: consider caching the type instances
-				var instance = Activator.CreateInstance(x) as OptionList;
-				var options_tag = "";
+			    var option_items = OptionList.GetItems(x);
+			    var options_tag = "";
 
-			    if( instance == null ) return "";
+			    if( option_items == null ) return "";
 
-			    foreach( var option in instance.Options ) {
+			    foreach( var option in option_items ) {
 			        options_tag += "<option value=\""+ option.Value +"\">"+ (option.Name ?? option.Value ) +"</option>";
 			    }
 
