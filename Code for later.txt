@@ -1,0 +1,30 @@
+﻿
+//	NOTE: This classes are commented, do NOT remove, they will be used later
+
+//	public class HtmlBuilderDslChain {
+//		readonly object from_object;
+//		readonly Dictionary<Type, Func<object, string>> html_builders;
+//
+//		readonly HtmlTag html_tag;
+//
+//		public HtmlBuilderDslChain( object from_object, Dictionary<Type, Func<object, string>> html_builders ) {
+//			this.from_object = from_object;
+//			this.html_builders = html_builders;
+//		}
+//
+//		public string from( object obj ) {
+//			throw new NotImplementedException( );
+//		}
+//
+//		public void from<TObject>() {
+//			throw new NotImplementedException();
+//		}
+//
+//		public override string ToString() {
+//			throw new NotImplementedException( );
+//		}
+//	}
+
+//	class HtmlTag : Enumerable {
+//		public static HtmlTag Select = new HtmlTag{ Value = "Select" };
+//	}

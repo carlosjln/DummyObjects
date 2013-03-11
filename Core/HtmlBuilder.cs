@@ -8,18 +8,21 @@ namespace DummyObjects {
 		static readonly Dictionary<Type, Func<object,string> > html_object_builders = new Dictionary<Type, Func<object, string>>();
 
 		static readonly Dictionary<Type, Func<Type,string> > html_type_builders = new Dictionary<Type, Func<Type, string>>() {
-			{ typeof(Enumerable), x => {
-				var opening_tag = "<select>";
-				var closing_tag = "</select>";
+			{typeof(OptionList), x => {
+				const string opening_tag = "<select>";
+				const string closing_tag = "</select>";
 
-				var options = Enumerable.GetAll( x );
+				// TODO: consider caching the type instances
+				var instance = Activator.CreateInstance(x) as OptionList;
 				var options_tag = "";
 
-				foreach( var option in options ) {
-					options_tag += "<option value=\""+ option.Value +"\">"+ option.Value +"</option>";
-				}
+			    if( instance == null ) return "";
 
-				return opening_tag + options_tag + closing_tag;
+			    foreach( var option in instance.Options ) {
+			        options_tag += "<option value=\""+ option.Value +"\">"+ (option.Name ?? option.Value ) +"</option>";
+			    }
+
+			    return opening_tag + options_tag + closing_tag;
 			}}
 		};
 
@@ -96,36 +99,5 @@ namespace DummyObjects {
 	public class HtmlBuilder<TObject> : HtmlBuilder {
 		public HtmlBuilder( ) : base( typeof(TObject) ) {}
 	}
-
-
-//	NOTE: This classes are commented, do NOT remove, they will be used later
-
-//	public class HtmlBuilderDslChain {
-//		readonly object from_object;
-//		readonly Dictionary<Type, Func<object, string>> html_builders;
-//
-//		readonly HtmlTag html_tag;
-//
-//		public HtmlBuilderDslChain( object from_object, Dictionary<Type, Func<object, string>> html_builders ) {
-//			this.from_object = from_object;
-//			this.html_builders = html_builders;
-//		}
-//
-//		public string from( object obj ) {
-//			throw new NotImplementedException( );
-//		}
-//
-//		public void from<TObject>() {
-//			throw new NotImplementedException();
-//		}
-//
-//		public override string ToString() {
-//			throw new NotImplementedException( );
-//		}
-//	}
-
-//	class HtmlTag : Enumerable {
-//		public static HtmlTag Select = new HtmlTag{ Value = "Select" };
-//	}
 
 }

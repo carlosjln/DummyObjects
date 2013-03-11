@@ -23,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+	<DebugSymbols>true</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,15 +41,17 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Extensions\internal_extensions.cs" />
-    <Compile Include="Core\Enumerable.cs" />
-    <Compile Include="Core\Interfaces\IEnumerable.cs" />
+    <Compile Include="Core\OptionList.cs" />
+    <Compile Include="Core\Interfaces\IOptionList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- RELEASE TO NUGET LOCAL FEED -->
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
     <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="AssemblyVersion" />
     </GetAssemblyIdentity>
-    <Exec Command="Nuget.exe pack $(ProjectPath) -OutputDirectory C:\Projects\Tools\Nuget\LocalFeed -Properties Configuration=Release" />
+    <Exec Command="Nuget.exe pack $(ProjectPath) -OutputDirectory C:\Projects\Tools\Nuget\LocalFeed -Symbols -Properties Configuration=Release" />
   </Target>
+  
 </Project>

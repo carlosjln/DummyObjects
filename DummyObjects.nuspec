@@ -5,7 +5,7 @@
 		<version>$version$</version>
 		
 		<title>DummyObjects</title>
-		<description>Some helpful extensions :)</description>
+		<description>Some useful objects :)</description>
 		<projectUrl>https://github.com/carlosjln/DummyObjects</projectUrl>
 		
 		<authors>Carlos J. López</authors>

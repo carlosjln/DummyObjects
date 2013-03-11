@@ -1,0 +1,1 @@
+nuget pack DummyObjects.csproj -Symbols -OutputDirectory C:\Projects\Tools\Nuget\LocalFeed -Properties Configuration=Debug
