@@ -13,7 +13,7 @@ namespace DummyObjects {
 				const string closing_tag = "</select>";
 
 				// TODO: consider caching the type instances
-			    var option_items = OptionList.GetItems(x);
+			    var option_items = OptionListItems.GetAll(x);
 			    var options_tag = "";
 
 			    if( option_items == null ) return "";
