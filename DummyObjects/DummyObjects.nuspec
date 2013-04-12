@@ -12,8 +12,4 @@
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<copyright>Copyright © 2013</copyright>
 	</metadata>
-	<files>
-        <file src="bin\Release\DummyObjects.pdb" target="lib\net40" />
-		<file src="**\*.cs" target="src" exclude="**\AssemblyInfo.cs"/>
-	</files>
 </package>

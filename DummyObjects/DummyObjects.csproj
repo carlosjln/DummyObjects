@@ -34,24 +34,29 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\AESEncryption.cs" />
-    <Compile Include="Core\AssemblyScanner.cs" />
-    <Compile Include="Core\HtmlBuilder.cs">
+    <Compile Include="AESEncryption.cs" />
+    <Compile Include="AssemblyScanner.cs" />
+    <Compile Include="HtmlBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Extensions\internal_extensions.cs" />
-    <Compile Include="Core\OptionList.cs" />
-    <Compile Include="Core\Interfaces\IOptionList.cs" />
+    <Compile Include="OptionList.cs" />
+    <Compile Include="Interfaces\IOptionList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- UPDATE PROJECT DEPENDENCIES -->
+  <Target Name="BeforeBuild">
+    <Exec Command="Nuget.exe Update packages.config" />
+  </Target>
   <!-- RELEASE TO NUGET LOCAL FEED -->
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
-    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
-      <Output TaskParameter="Assemblies" ItemName="AssemblyVersion" />
-    </GetAssemblyIdentity>
-    <Exec Command="Nuget.exe pack $(ProjectPath) -OutputDirectory C:\Projects\Tools\Nuget\LocalFeed -Symbols -Properties Configuration=Release" />
+    <!-- MOVE PREVIOUS VERSIONS FROM FEED DIRECTORY -->
+    <Exec Command="C:\Projects\Tools\Nuget\GarbageCollector.exe $(ProjectName)" />
+    <!-- PACK NEW VERSION -->
+    <Exec Command="Nuget.exe pack $(ProjectPath) -OutputDirectory C:\Projects\Tools\Nuget\feed -Symbols -Properties Configuration=Release" />
   </Target>
 </Project>
