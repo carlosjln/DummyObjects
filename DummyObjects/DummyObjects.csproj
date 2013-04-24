@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="AESEncryption.cs" />
     <Compile Include="AssemblyScanner.cs" />
+    <Compile Include="Extensions\external_extensions.cs" />
     <Compile Include="HtmlBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -54,9 +55,6 @@
   </Target>
   <!-- RELEASE TO NUGET LOCAL FEED -->
   <Target Name="AfterBuild" Condition="'$(Configuration)' == 'Release'">
-    <!-- MOVE PREVIOUS VERSIONS FROM FEED DIRECTORY -->
-    <Exec Command="C:\Projects\Tools\Nuget\GarbageCollector.exe $(ProjectName)" />
-    <!-- PACK NEW VERSION -->
-    <Exec Command="Nuget.exe pack $(ProjectPath) -OutputDirectory C:\Projects\Tools\Nuget\feed -Symbols -Properties Configuration=Release" />
+    <Exec Command="NugetPacker.exe $(ProjectName) 0 $(ProjectDir)" />
   </Target>
 </Project>
